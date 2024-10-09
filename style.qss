@@ -1,0 +1,52 @@
+QMainWindow {
+    background-color: #4B4B4B;
+}
+
+QDialog {
+    background-color: #4B4B4B;
+    color: white;
+}
+
+QWidget {
+    color: white;
+}
+
+QPushButton {
+    background-color: #7D7D7D;
+    border: 1px solid #C0C0C0;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+QPushButton:pressed {
+    background-color: #A0A0A0;
+}
+
+QListWidget {
+    background-color: #4B4B4B;
+    border: 1px solid #C0C0C0;
+    color: white;
+}
+
+QListWidget::item:selected {
+    background-color: #7D7D7D;
+    color: black;
+}
+
+QLabel {
+    color: white;
+}
+
+QTimeEdit {
+    background-color: #7D7D7D;
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+QTimeEdit:focus {
+    border: 1px solid black;
+    background-color: #A0A0A0;
+}

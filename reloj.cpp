@@ -27,7 +27,7 @@ Reloj::Reloj(QWidget *parent)
     connect(alarmaDialog, &AlarmaDialog::stopAlarm, this, &Reloj::stopAlarm);
     connect(alarmaDialog, &AlarmaDialog::snoozeAlarm, this, &Reloj::snoozeAlarm);
 
-    timer->start(1000);
+    timer->start(500);
 
     alarmSound.setSource(QUrl("qrc:/Sonido.wav"));
     alarmSound.setLoopCount(QSoundEffect::Infinite);
@@ -104,21 +104,29 @@ void Reloj::deactivateAlarm()
 void Reloj::checkAlarm()
 {
     QTime currentTime = QTime::currentTime();
+
     for (int i = 0; i < alarmTimes.size(); ++i)
     {
-        if (alarmTimes[i].second && currentTime >= alarmTimes[i].first)
+        // Si la alarma está activa
+        if (alarmTimes[i].second)
         {
-            currentAlarmIndex = i;
-            alarmSound.play();
+            QTime alarmTime = alarmTimes[i].first;
 
-            alarmaDialog->setAlarmMessage("Alarma sonando:  " + alarmTimes[i].first.toString());
-            alarmaDialog->exec();
+            // Comparar si la hora actual es exactamente la misma que la hora de la alarma
+            if (currentTime.hour() == alarmTime.hour() && currentTime.minute() == alarmTime.minute())
+            {
+                // Si la alarma ya sonó, no volver a sonar
+                if (currentAlarmIndex != i) {
+                    currentAlarmIndex = i;
+                    alarmSound.play();
 
-            break;
+                    alarmaDialog->setAlarmMessage("Alarma sonando: " + alarmTimes[i].first.toString());
+                    alarmaDialog->exec();
+                }
+            }
         }
     }
 }
-
 
 void Reloj::stopAlarm()
 {

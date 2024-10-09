@@ -32,7 +32,6 @@ private slots:
     void stopAlarm();
     void snoozeAlarm();
     void updateVolume(int volume);
-    void setupAlarmListWidget();
 
 private:
     Ui::Reloj *ui;
